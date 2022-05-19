@@ -1,11 +1,12 @@
 import React from 'react';
 import './App.css';
-import {Optimaized} from "./Optimazed";
+import {Main} from "./components/main/Main";
 
 function App() {
     return (
         <div className="App">
-            <Optimaized/>
+            <Main/>
+            {/*<Optimaized/>*/}
         </div>
     );
 }
