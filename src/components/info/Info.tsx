@@ -1,85 +1,245 @@
 import React, {ChangeEvent, useState} from 'react';
-
+import {SubmitHandler, useForm} from "react-hook-form";
+import style from './Info.module.css';
 
 type  StateType = {
-    defundd: string
-    defund: string
-    name: string
-    network: string
-    wallet: string
-    ufetf: string
-    peers: string
-    seeds: string
-    pruning1: string
-    pruning2: string
-    pruning3: string
-    // moniker: string
+    defundd?: string
+    defund?: string
+    name?: string
+    network?: string
+    wallet?: string
+    ufetf?: string
+    peers?: string
+    seeds?: string
+    pruning1?: string
+    pruning2?: string
+    pruning3?: string
+    a1?: string
+    a2?: string
+    a3?: string
+    a4?: string
+    c1?: string
+    c2?: string
+    c3?: string
+    c4?: string
+    c5?: string
+    defundvaloper1ms?: string
 }
 
-export const Optimaized = React.memo(() => {
+export const Info = React.memo(() => {
 
 
     const [state, setState] = useState<StateType>({} as StateType);
+    // const {register, handleSubmit, formState: {errors}} = useForm<StateType>()
 
-    const inputHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        const {name, value} = event.target;
-        setState({
-            ...state,
-            [name]: value
-        })
+
+    // const inputHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    //     const {name, value} = event.target;
+    //     setState({
+    //         ...state,
+    //         [name]: value
+    //     })
+    // }
+
+    // const formik = useFormik({
+    //     initialValues: {
+    //         defundd: "",
+    //         defund: "",
+    //         name: "",
+    //         network: "",
+    //         wallet: "",
+    //         ufetf: "",
+    //         peers: "",
+    //         seeds: "",
+    //         pruning1: "",
+    //         pruning2: "",
+    //         pruning3: "",
+    //         a1: "",
+    //         a2: "",
+    //         a3: "",
+    //         a4: "",
+    //         c1: "",
+    //         c2: "",
+    //         c3: "",
+    //         c4: "",
+    //         c5: "",
+    //         defundvaloper1ms: ""
+    //     },
+    //     validate: (values) => {
+    //         const errors: StateType = {};
+    //         if (!values.defundd) {
+    //             errors.defundd = 'Required';
+    //         } else if (!/^[a-zA-Z0-9]+$/.test(values.defundd)) {
+    //             errors.defundd = 'Поле должно состоять только из латинских символов и цифр.';
+    //         }
+    //         if (!values.pruning1) {
+    //             errors.pruning1 = 'Required';
+    //         }
+    //         if (!/^\d+$/.test(values.pruning1)) {
+    //             errors.pruning1 = 'Поле должно состоять только из цифр.';
+    //         }
+    //
+    //         return errors;
+    //     },
+    //
+    //     onSubmit: values => {
+    //         //     alert(JSON.stringify(values, null, 2));
+    //         //     formik.resetForm()
+    //     },
+    // });
+
+
+    const onSubmit: SubmitHandler<StateType> = (data) => {
+
     }
+
+
+    const inputHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        const {name, value} = e.target;
+        if (value && /^[a-zA-Z0-9]+$/.test(value)) {
+            setState({
+                ...state,
+                [name]: value
+            })
+        } else {
+            setState({
+                ...state,
+                [name]: ""
+            })
+        }
+
+
+    }
+
+
+    const {register, handleSubmit, formState: {errors, isValid}} = useForm({
+        mode: 'onChange'
+    });
+
+
 
     return (
         <div>
-            <div className={"row"}>
-                <span>ИМЯ_КОМАНДНОГО_ФАЙЛА</span>
-                <input name="defundd" onChange={inputHandler} value={state.defundd}/>
-            </div>
-            <div className={"row"}>
-                <span>ИМЯ_ДОМАШНЕГО_КАТАЛОГА</span>
-                <input name="defund" onChange={inputHandler} value={state.defund}/>
-            </div>
-            <div className={"row"}>
-                <span>ИМЯ_НОДЫ</span>
-                <input name="name" onChange={inputHandler} value={state.name}/>
-            </div>
-            <div className={"row"}>
-                <span>НАЗВАНИЕ КОШЕЛЬКА</span>
-                <input name="wallet" onChange={inputHandler} value={state.wallet}/>
-            </div>
-            <div className={"row"}>
-                <span>ИМЯ_СЕТИ</span>
-                <input name="network" onChange={inputHandler} value={state.network}/>
-            </div>
-
-            <div className={"row"}>
-                <span>ИМЯ_ДЕНОМА</span>
-                <input name="ufetf" onChange={inputHandler} value={state.ufetf}/>
-            </div>
-
-            <div className={"row"}>
-                <span>ПРУНИНГ </span>
-                <input name="pruning1" onChange={inputHandler} value={state.pruning1}/>
-                <input name="pruning2" onChange={inputHandler} value={state.pruning2}/>
-                <input name="pruning3" onChange={inputHandler} value={state.pruning3}/>
-            </div>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <div className={style.row}>
+                    <span>ИМЯ_КОМАНДНОГО_ФАЙЛА</span>
+                    <input {...register("defundd", {
+                        pattern: {
+                            value: /^[a-zA-Z0-9]+$/,
+                            message: ('Поле может состоять только  латинские символы и цифры.')
+                        }
+                    })} onInput={inputHandler} value={state.defundd}/>
+                    {errors.defundd && <div style={{color: "red"}}>{errors.defundd.message}</div>}
+                    onInput={()=> errors.defundd==undefined ? inputHandler : null}
+                </div>
 
 
-            <div className={"row"}>
-                <span>peers</span>
-                <input name="peers" onChange={inputHandler} value={state.peers}/>
-            </div>
-            <div className={"row"}>
-                <span>seeds</span>
-                <input name="seeds" onChange={inputHandler} value={state.seeds}/>
-            </div>
-            {/*<div className={"row"}>*/}
-            {/*    <span>moniker</span>*/}
-            {/*    <input name="moniker" onChange={inputHandler} value={state.moniker}/>*/}
-            {/*</div>*/}
+                <div className={style.row}>
+                    <span>ИМЯ_ДОМАШНЕГО_КАТАЛОГА</span>
+
+                    <input {...register("defund", {
+                        pattern: {
+                            value: /^[a-zA-Z0-9]+$/,
+                            message: ('Поле может состоять только  латинские символы и цифры.')
+                        }
+                    })} onInput={inputHandler} value={state.defund}/>
+                    {errors.defund && <div style={{color: "red"}}>{errors.defund.message}</div>}
+
+
+                </div>
+                <div className={style.row}>
+                    <span>ИМЯ_НОДЫ</span>
+                    <input name="name" onChange={inputHandler} value={state.name}/>
+
+                </div>
+                <div className={style.row}>
+                    <span>НАЗВАНИЕ КОШЕЛЬКА</span>
+                    <input name="wallet" onChange={inputHandler} value={state.wallet}/>
+
+                </div>
+                <div className={style.row}>
+                    <span>ИМЯ_СЕТИ</span>
+                    <input name="network" onChange={inputHandler} value={state.network}/>
+
+                </div>
+                <div className={style.row}>
+                    <span>ИМЯ_ДЕНОМА</span>
+                    <input name="ufetf" onChange={inputHandler} value={state.ufetf}/>
+                </div>
+
+                <div className={style.row}>
+                    <span>ПРУНИНГ </span>
+                    <input className={style.number} name="pruning1" onChange={inputHandler} value={state.pruning1}/>
+
+
+                    <input className={style.number} name="pruning2" onChange={inputHandler} value={state.pruning2}/>
+
+
+                    <input className={style.number} name="pruning3" onChange={inputHandler} value={state.pruning3}/>
+
+                </div>
+                <div className={style.row}>
+                    <span>peers</span>
+                    <input onChange={inputHandler} value={state.peers}/>
+
+                </div>
+                <div className={style.row}>
+                    <span>seeds</span>
+                    <input onChange={inputHandler} value={state.seeds}/>
+                </div>
+
+                <div className={style.row}>
+                    <span>$A1</span>
+                    <input onChange={inputHandler} value={state.a1}/>
+
+                </div>
+                <div className={style.row}>
+                    <span>$A2</span>
+                    <input value={state.a2}/>
+
+                </div>
+                <div className={style.row}>
+                    <span>$A3</span>
+                    <input onChange={inputHandler} value={state.a3}/>
+
+                </div>
+                <div className={style.row}>
+                    <span>$A4</span>
+                    <input onChange={inputHandler} value={state.a4}/>
+
+                </div>
+                <div className={style.row}>
+                    <span>$C1</span>
+                    <input name="c1" onChange={inputHandler} value={state.c1}/>
+
+                </div>
+                <div className={style.row}>
+                    <span>$C2</span>
+                    <input name="c2" onChange={inputHandler} value={state.c2}/>
+                </div>
+                <div className={style.row}>
+                    <span>$C3</span>
+                    <input name="c3" onChange={inputHandler} value={state.c3}/>
+                </div>
+                <div className={style.row}>
+                    <span>$C4</span>
+                    <input name="c4" onChange={inputHandler} value={state.c4}/>
+                </div>
+                <div className={style.row}>
+                    <span>$C5</span>
+                    <input name="c5" onChange={inputHandler} value={state.c5}/>
+                </div>
+                <div className={style.row}>
+                    <span>АДРЕСС_ВАЛИДАТОРА</span>
+                    <input name="defundvaloper1ms" onChange={inputHandler} value={state.defundvaloper1ms}/>
+                </div>
+
+            </form>
             <div className={"result"}>
                 <h3>Инициализируем ноду {state.name}</h3>
                 <div>{state.defundd} init {state.name} --chain-id={state.network}</div>
+
+
                 <h3>Cоздаем или восстанавливаем кошелек и сохраняем вывод</h3>
                 <div># создать кошелек</div>
                 <div>{state.defundd} keys add {state.wallet}</div>
@@ -170,7 +330,7 @@ export const Optimaized = React.memo(() => {
                 <br/>
                 <div>------------------КОМАНДЫ ПОСЛЕ УСТАНОВКИ-----------</div>
                 <br/>
-                <div>АДРЕСС_ВАЛИДАТОРА={'<defundvaloper1ms...>'}</div>
+                <div>АДРЕСС_ВАЛИДАТОРА={state.defundvaloper1ms}</div>
                 <div>ПОРТ=26657 (по дефолту стоит такой (серым или как там называется по умолчанию значение), но
                     если его меняют почти во все команды добавляется команда
                 </div>
@@ -197,32 +357,32 @@ export const Optimaized = React.memo(() => {
                 <br/>
                 <h3>Проверить валидатора</h3>
                 <br/>
-                <div>{state.defundd} query staking validator {' <defundvaloper1ms...> N'}</div>
+                <div>{state.defundd} query staking validator {state.defundvaloper1ms} N</div>
                 <div>{state.defundd} query staking validators N --limit 1000000 -o json | jq '.validators[] |
                     select(.description.moniker=={state.name} )' | jq
                 </div>
                 <h3>Собрать комиссионные + реварды</h3>
                 <br/>
                 <div>{state.defundd} tx distribution
-                    withdraw-rewards {'<defundvaloper1ms...> '} --from {state.wallet} --chain-id {state.defund}-private-1
+                    withdraw-rewards {state.defundvaloper1ms} --from {state.wallet} --chain-id {state.defund}-private-1
                     --fees 5{state.ufetf} --commission N -y
                 </div>
                 <br/>
                 <h3>Заделегировать себе в стейк еще (так отправляется 1 монетa)</h3>
                 <br/>
                 <div>{state.defundd} tx staking
-                    delegate {' <defundvaloper1ms...> '} 1000000{state.ufetf} --from {state.wallet} --fees
+                    delegate {state.defundvaloper1ms} 1000000{state.ufetf} --from {state.wallet} --fees
                     5{state.ufetf} --chain-id {state.defund}-private-1 N -y
                 </div>
                 <br/>
                 <h3>Unbond (в примере 10 монет)</h3>
                 <br/>
-                <div>{state.defundd} tx staking unbond {'<defundvaloper1ms...>'} 10000000{state.ufetf}
+                <div>{state.defundd} tx staking unbond {state.defundvaloper1ms} 10000000{state.ufetf}
                     --from {state.wallet} --fees 5{state.ufetf} --chain-id {state.defund}-private-1 N -y
                 </div>
                 <br/>
                 <h3>Отправить монеты на другой адрес</h3>
-                <div>{state.defundd} tx bank send {state.wallet} {'<defund1le...>'} 1001000{state.ufetf} --fees
+                <div>{state.defundd} tx bank send {state.wallet} {state.defundvaloper1ms} 1001000{state.ufetf} --fees
                     5{state.ufetf} --chain-id {state.defund}-private-1 N -y
                 </div>
                 <br/>

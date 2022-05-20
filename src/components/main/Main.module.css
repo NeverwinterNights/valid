@@ -27,3 +27,7 @@
 .link {
     margin-bottom: 10px;
 }
+
+.hash {
+    min-width: 430px;
+}

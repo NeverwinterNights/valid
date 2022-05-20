@@ -1,0 +1,11 @@
+.copy {
+    cursor: pointer;
+    width: 20px;
+    aspect-ratio: auto 20 / 15;
+    height: 15px;
+    margin-left: 10px;
+}
+svg {
+    width: 20px;
+    height: 15px;
+}
