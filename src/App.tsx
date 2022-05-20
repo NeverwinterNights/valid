@@ -7,7 +7,7 @@ import { Info } from './components/info/Info';
 function App() {
     return (
         <div className="App">
-            <Main/>
+            {/*<Main/>*/}
             <Info/>
         </div>
     );

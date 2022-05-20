@@ -28,71 +28,34 @@ type  StateType = {
 
 export const Info = React.memo(() => {
 
-
-    const [state, setState] = useState<StateType>({} as StateType);
-    // const {register, handleSubmit, formState: {errors}} = useForm<StateType>()
-
-
-    // const inputHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    //     const {name, value} = event.target;
-    //     setState({
-    //         ...state,
-    //         [name]: value
-    //     })
-    // }
-
-    // const formik = useFormik({
-    //     initialValues: {
-    //         defundd: "",
-    //         defund: "",
-    //         name: "",
-    //         network: "",
-    //         wallet: "",
-    //         ufetf: "",
-    //         peers: "",
-    //         seeds: "",
-    //         pruning1: "",
-    //         pruning2: "",
-    //         pruning3: "",
-    //         a1: "",
-    //         a2: "",
-    //         a3: "",
-    //         a4: "",
-    //         c1: "",
-    //         c2: "",
-    //         c3: "",
-    //         c4: "",
-    //         c5: "",
-    //         defundvaloper1ms: ""
-    //     },
-    //     validate: (values) => {
-    //         const errors: StateType = {};
-    //         if (!values.defundd) {
-    //             errors.defundd = 'Required';
-    //         } else if (!/^[a-zA-Z0-9]+$/.test(values.defundd)) {
-    //             errors.defundd = 'Поле должно состоять только из латинских символов и цифр.';
-    //         }
-    //         if (!values.pruning1) {
-    //             errors.pruning1 = 'Required';
-    //         }
-    //         if (!/^\d+$/.test(values.pruning1)) {
-    //             errors.pruning1 = 'Поле должно состоять только из цифр.';
-    //         }
-    //
-    //         return errors;
-    //     },
-    //
-    //     onSubmit: values => {
-    //         //     alert(JSON.stringify(values, null, 2));
-    //         //     formik.resetForm()
-    //     },
-    // });
-
-
-    const onSubmit: SubmitHandler<StateType> = (data) => {
-
+    const initialState = {
+        defundd: "",
+        defund: "",
+        name: "",
+        network: "",
+        wallet: "",
+        ufetf: "",
+        peers: "",
+        seeds: "",
+        pruning1: "",
+        pruning2: "",
+        pruning3: "",
+        a1: "",
+        a2: "",
+        a3: "",
+        a4: "",
+        c1: "",
+        c2: "",
+        c3: "",
+        c4: "",
+        c5: "",
+        defundvaloper1ms: "",
     }
 
+
+    const [state, setState] = useState<StateType>(initialState);
+    const onSubmit: SubmitHandler<StateType> = (data) => {
+    }
 
     const inputHandler = (e: ChangeEvent<HTMLInputElement>) => {
         const {name, value} = e.target;
@@ -107,15 +70,86 @@ export const Info = React.memo(() => {
                 [name]: ""
             })
         }
-
-
     }
+
+    const inputHandlerNumbers6 = (e: ChangeEvent<HTMLInputElement>) => {
+        const {name, value} = e.target;
+        if (value && /^\d+$/.test(value) && value.length <= 6) {
+            setState({
+                ...state,
+                [name]: value
+            })
+        } else {
+            setState({
+                ...state,
+                [name]: ""
+            })
+        }
+    }
+
+    const inputHandlerNumbers2 = (e: ChangeEvent<HTMLInputElement>) => {
+        const {name, value} = e.target;
+        if (value && /^\d+$/.test(value) && value.length <= 2) {
+            setState({
+                ...state,
+                [name]: value
+            })
+        } else {
+            setState({
+                ...state,
+                [name]: ""
+            })
+        }
+    }
+    const inputHandlerNumbers4 = (e: ChangeEvent<HTMLInputElement>) => {
+        const {name, value} = e.target;
+        if (value && /^\d+$/.test(value) && value.length <= 4) {
+            setState({
+                ...state,
+                [name]: value
+            })
+        } else {
+            setState({
+                ...state,
+                [name]: ""
+            })
+        }
+    }
+
+    const inputHandlerNumbers5 = (e: ChangeEvent<HTMLInputElement>) => {
+        const {name, value} = e.target;
+        if (value && /^\d+$/.test(value) && value.length <= 5) {
+            setState({
+                ...state,
+                [name]: value
+            })
+        } else {
+            setState({
+                ...state,
+                [name]: ""
+            })
+        }
+    }
+    const inputHandlerReg = (e: ChangeEvent<HTMLInputElement>) => {
+        const {name, value} = e.target;
+        if ( /^[0-9,:@]*$/.test(value)) {
+            setState({
+                ...state,
+                [name]: value
+            })
+        } else {
+            setState({
+                ...state,
+                [name]: ""
+            })
+        }
+    }
+
 
 
     const {register, handleSubmit, formState: {errors, isValid}} = useForm({
         mode: 'onChange'
     });
-
 
 
     return (
@@ -130,7 +164,6 @@ export const Info = React.memo(() => {
                         }
                     })} onInput={inputHandler} value={state.defundd}/>
                     {errors.defundd && <div style={{color: "red"}}>{errors.defundd.message}</div>}
-                    onInput={()=> errors.defundd==undefined ? inputHandler : null}
                 </div>
 
 
@@ -149,89 +182,280 @@ export const Info = React.memo(() => {
                 </div>
                 <div className={style.row}>
                     <span>ИМЯ_НОДЫ</span>
-                    <input name="name" onChange={inputHandler} value={state.name}/>
+                    <input {...register("name", {
+                        pattern: {
+                            value: /^[a-zA-Z0-9]+$/,
+                            message: ('Поле может состоять только  латинские символы и цифры.')
+                        }
+                    })} onInput={inputHandler} value={state.name}/>
+                    {errors.name && <div style={{color: "red"}}>{errors.name.message}</div>}
 
                 </div>
                 <div className={style.row}>
                     <span>НАЗВАНИЕ КОШЕЛЬКА</span>
-                    <input name="wallet" onChange={inputHandler} value={state.wallet}/>
+                    <input  {...register("wallet", {
+                        pattern: {
+                            value: /^[a-zA-Z0-9]+$/,
+                            message: ('Поле может состоять только  латинские символы и цифры.')
+                        }
+                    })} onInput={inputHandler} value={state.wallet}/>
+                    {errors.wallet && <div style={{color: "red"}}>{errors.wallet.message}</div>}
 
                 </div>
                 <div className={style.row}>
                     <span>ИМЯ_СЕТИ</span>
-                    <input name="network" onChange={inputHandler} value={state.network}/>
+                    <input {...register("network", {
+                        pattern: {
+                            value: /^[a-zA-Z0-9]+$/,
+                            message: ('Поле может состоять только  латинские символы и цифры.')
+                        }
+                    })} onInput={inputHandler} value={state.network}/>
+                    {errors.network && <div style={{color: "red"}}>{errors.network.message}</div>}
 
                 </div>
                 <div className={style.row}>
                     <span>ИМЯ_ДЕНОМА</span>
-                    <input name="ufetf" onChange={inputHandler} value={state.ufetf}/>
+                    <input {...register("ufetf", {
+                        pattern: {
+                            value: /^[a-zA-Z0-9]+$/,
+                            message: ('Поле может состоять только  латинские символы и цифры.')
+                        }
+                    })} onInput={inputHandler} value={state.ufetf}/>
+                    {errors.ufetf && <div style={{color: "red"}}>{errors.ufetf.message}</div>}
+
                 </div>
 
                 <div className={style.row}>
                     <span>ПРУНИНГ </span>
-                    <input className={style.number} name="pruning1" onChange={inputHandler} value={state.pruning1}/>
+                    <input className={style.number} {...register("pruning1", {
+                        minLength: {
+                            value: 6,
+                            message: "Поле может состоять только  из шести цифр"
+                        },
+                        maxLength: {
+                            value: 6,
+                            message: "Поле может состоять только  из шести цифр"
+                        },
+                        pattern: {
+                            value: /^\d+$/,
+                            message: ('Поле может состоять только  из пяти цифр.')
+                        }
+                    })} onInput={inputHandlerNumbers6} value={state.pruning1} name="pruning1"/>
 
 
-                    <input className={style.number} name="pruning2" onChange={inputHandler} value={state.pruning2}/>
+                    <input className={style.number} {...register("pruning2", {
+                        minLength: {
+                            value: 2,
+                            message: "Поле может состоять только  из двух цифр"
+                        },
+                        maxLength: {
+                            value: 2,
+                            message: "Поле может состоять только  из двух цифр"
+                        },
+                        pattern: {
+                            value: /^\d+$/,
+                            message: ('Поле может состоять только  из двух цифр.')
+                        }
+                    })} onInput={inputHandlerNumbers2} value={state.pruning2} name="pruning2"/>
 
 
-                    <input className={style.number} name="pruning3" onChange={inputHandler} value={state.pruning3}/>
+                    <input className={style.number} {...register("pruning3", {
+                        minLength: {
+                            value: 4,
+                            message: "Поле может состоять только  из четырех цифр"
+                        },
+                        maxLength: {
+                            value: 4,
+                            message: "Поле может состоять только  из четырех цифр"
+                        },
+                        pattern: {
+                            value: /^\d+$/,
+                            message: ('Поле может состоять только  из четырех цифр.')
+                        }
+                    })} onInput={inputHandlerNumbers4} value={state.pruning3} name="pruning3"/>
+                    {errors.pruning1 && <div style={{color: "red"}}>{errors.pruning1.message}</div> ||
+                    errors.pruning2 && <div style={{color: "red"}}>{errors.pruning2.message}</div> ||
+                    errors.pruning3 && <div style={{color: "red"}}>{errors.pruning3.message}</div>
+                    }
 
                 </div>
                 <div className={style.row}>
                     <span>peers</span>
-                    <input onChange={inputHandler} value={state.peers}/>
 
+                    <input  {...register("peers", {
+                        pattern: {
+                            value: /^[0-9,:@]*$/,
+                            message: ('Поле может состоять только  из  цифр, запятой, двоеточия и @.')
+                        }
+                    })} onInput={inputHandlerReg} value={state.peers}/>
+                    {errors.peers && <div style={{color: "red"}}>{errors.peers.message}</div>}
                 </div>
                 <div className={style.row}>
                     <span>seeds</span>
-                    <input onChange={inputHandler} value={state.seeds}/>
+                    <input {...register("seeds", {
+                        pattern: {
+                            value: /^[0-9,:@]*$/,
+                            message: ('Поле может состоять только  из  цифр, запятой, двоеточия и @.')
+                        }
+                    })} onInput={inputHandlerReg}  value={state.seeds}/>
+                    {errors.seeds && <div style={{color: "red"}}>{errors.seeds.message}</div>}
                 </div>
 
-                <div className={style.row}>
-                    <span>$A1</span>
-                    <input onChange={inputHandler} value={state.a1}/>
 
-                </div>
-                <div className={style.row}>
-                    <span>$A2</span>
-                    <input value={state.a2}/>
+                <div className={style.row}>app.toml: 1317
+                    <input className={style.smallImp} {...register("a1", {
+                        minLength: {
+                            value: 5,
+                            message: "Поле может состоять только  из пяти цифр"
+                        },
+                        maxLength: {
+                            value: 5,
+                            message: "Поле может состоять только  из пяти цифр"
+                        },
+                        pattern: {
+                            value: /^\d+$/,
+                            message: ('Поле может состоять только  из пяти цифр.')
+                        }
+                    })} onInput={inputHandlerNumbers5} value={state.a1}/>, 8080
 
-                </div>
-                <div className={style.row}>
-                    <span>$A3</span>
-                    <input onChange={inputHandler} value={state.a3}/>
+                    <input className={style.smallImp}  {...register("a2", {
+                        minLength: {
+                            value: 5,
+                            message: "Поле может состоять только  из пяти цифр"
+                        },
+                        maxLength: {
+                            value: 5,
+                            message: "Поле может состоять только  из пяти цифр"
+                        },
+                        pattern: {
+                            value: /^\d+$/,
+                            message: ('Поле может состоять только  из пяти цифр.')
+                        }
+                    })} onInput={inputHandlerNumbers5} value={state.a2}/>, 9090
+                    <input className={style.smallImp} {...register("a3", {
+                        minLength: {
+                            value: 5,
+                            message: "Поле может состоять только  из пяти цифр"
+                        },
+                        maxLength: {
+                            value: 5,
+                            message: "Поле может состоять только  из пяти цифр"
+                        },
+                        pattern: {
+                            value: /^\d+$/,
+                            message: ('Поле может состоять только  из пяти цифр.')
+                        }
+                    })} onInput={inputHandlerNumbers5} value={state.a3}/>, 9091
+                    <input className={style.smallImp} {...register("a4", {
+                        minLength: {
+                            value: 5,
+                            message: "Поле может состоять только  из пяти цифр"
+                        },
+                        maxLength: {
+                            value: 5,
+                            message: "Поле может состоять только  из пяти цифр"
+                        },
+                        pattern: {
+                            value: /^\d+$/,
+                            message: ('Поле может состоять только  из пяти цифр.')
+                        }
+                    })} onInput={inputHandlerNumbers5} value={state.a4}/></div>
+                {errors.a1 && <div style={{color: "red"}}>{errors.a1.message}</div> ||
+                errors.a2 && <div style={{color: "red"}}>{errors.a2.message}</div> ||
+                errors.a3 && <div style={{color: "red"}}>{errors.a3.message}</div> ||
+                errors.a4 && <div style={{color: "red"}}>{errors.a4.message}</div>
+                }
 
-                </div>
-                <div className={style.row}>
-                    <span>$A4</span>
-                    <input onChange={inputHandler} value={state.a4}/>
 
-                </div>
-                <div className={style.row}>
-                    <span>$C1</span>
-                    <input name="c1" onChange={inputHandler} value={state.c1}/>
+                <div className={style.row}>config.toml: 26658
+                    <input className={style.smallImp} {...register("c1", {
+                        minLength: {
+                            value: 5,
+                            message: "Поле может состоять только  из пяти цифр"
+                        },
+                        maxLength: {
+                            value: 5,
+                            message: "Поле может состоять только  из пяти цифр"
+                        },
+                        pattern: {
+                            value: /^\d+$/,
+                            message: ('Поле может состоять только  из пяти цифр.')
+                        }
+                    })} onInput={inputHandlerNumbers5} value={state.c1}/>, 26657
+                    <input className={style.smallImp} {...register("c2", {
+                        minLength: {
+                            value: 5,
+                            message: "Поле может состоять только  из пяти цифр"
+                        },
+                        maxLength: {
+                            value: 5,
+                            message: "Поле может состоять только  из пяти цифр"
+                        },
+                        pattern: {
+                            value: /^\d+$/,
+                            message: ('Поле может состоять только  из пяти цифр.')
+                        }
+                    })} onInput={inputHandlerNumbers5} value={state.c2}/>, 6060
+                    <input className={style.smallImp} {...register("c3", {
+                        minLength: {
+                            value: 5,
+                            message: "Поле может состоять только  из пяти цифр"
+                        },
+                        maxLength: {
+                            value: 5,
+                            message: "Поле может состоять только  из пяти цифр"
+                        },
+                        pattern: {
+                            value: /^\d+$/,
+                            message: ('Поле может состоять только  из пяти цифр.')
+                        }
+                    })} onInput={inputHandlerNumbers5} value={state.c3}/>, 26656
 
-                </div>
-                <div className={style.row}>
-                    <span>$C2</span>
-                    <input name="c2" onChange={inputHandler} value={state.c2}/>
-                </div>
-                <div className={style.row}>
-                    <span>$C3</span>
-                    <input name="c3" onChange={inputHandler} value={state.c3}/>
-                </div>
-                <div className={style.row}>
-                    <span>$C4</span>
-                    <input name="c4" onChange={inputHandler} value={state.c4}/>
-                </div>
-                <div className={style.row}>
-                    <span>$C5</span>
-                    <input name="c5" onChange={inputHandler} value={state.c5}/>
+                    <input className={style.smallImp} {...register("c4", {
+                        minLength: {
+                            value: 5,
+                            message: "Поле может состоять только  из пяти цифр"
+                        },
+                        maxLength: {
+                            value: 5,
+                            message: "Поле может состоять только  из пяти цифр"
+                        },
+                        pattern: {
+                            value: /^\d+$/,
+                            message: ('Поле может состоять только  из пяти цифр.')
+                        }
+                    })} onInput={inputHandlerNumbers5} value={state.c4}/>, 26660
+                    <input className={style.smallImp} {...register("c5", {
+                        minLength: {
+                            value: 5,
+                            message: "Поле может состоять только  из пяти цифр"
+                        },
+                        maxLength: {
+                            value: 5,
+                            message: "Поле может состоять только  из пяти цифр"
+                        },
+                        pattern: {
+                            value: /^\d+$/,
+                            message: ('Поле может состоять только  из пяти цифр.')
+                        }
+                    })} onInput={inputHandlerNumbers5} value={state.c5}/>
+                    {errors.c1 && <div style={{color: "red"}}>{errors.c1.message}</div> ||
+                    errors.c2 && <div style={{color: "red"}}>{errors.c2.message}</div> ||
+                    errors.c3 && <div style={{color: "red"}}>{errors.c3.message}</div> ||
+                    errors.c4 && <div style={{color: "red"}}>{errors.c4.message}</div> ||
+                    errors.c5 && <div style={{color: "red"}}>{errors.c5.message}</div>
+                    }
                 </div>
                 <div className={style.row}>
                     <span>АДРЕСС_ВАЛИДАТОРА</span>
-                    <input name="defundvaloper1ms" onChange={inputHandler} value={state.defundvaloper1ms}/>
+                    <input {...register("defundvaloper1ms", {
+                        pattern: {
+                            value: /^\d+$/,
+                            message: ('Поле может состоять только  латинские символы и цифры.')
+                        }
+                    })} onInput={inputHandler} value={state.defundvaloper1ms}/>
+                    {errors.defundvaloper1ms && <div style={{color: "red"}}>{errors.defundvaloper1ms.message}</div>}
+
                 </div>
 
             </form>
