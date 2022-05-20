@@ -1,6 +1,7 @@
 import React, {ChangeEvent, useState} from 'react';
 import {SubmitHandler, useForm} from "react-hook-form";
 import style from './Info.module.css';
+import {useNavigate} from "react-router-dom";
 
 type  StateType = {
     defundd?: string
@@ -52,6 +53,7 @@ export const Info = React.memo(() => {
         defundvaloper1ms: "",
     }
 
+    const nav = useNavigate()
 
     const [state, setState] = useState<StateType>(initialState);
     const onSubmit: SubmitHandler<StateType> = (data) => {
@@ -132,7 +134,7 @@ export const Info = React.memo(() => {
     }
     const inputHandlerReg = (e: ChangeEvent<HTMLInputElement>) => {
         const {name, value} = e.target;
-        if ( /^[a-z0-9,:@]*$/.test(value)) {
+        if (/^[a-z0-9,:@]*$/.test(value)) {
             setState({
                 ...state,
                 [name]: value
@@ -146,7 +148,6 @@ export const Info = React.memo(() => {
     }
 
 
-
     const {register, handleSubmit, formState: {errors, isValid}} = useForm({
         mode: 'onChange'
     });
@@ -154,6 +155,10 @@ export const Info = React.memo(() => {
 
     return (
         <div>
+            <button onClick={() => {
+                nav(`/main`)
+            }}>To Info Main
+            </button>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className={style.row}>
                     <span>ИМЯ_КОМАНДНОГО_ФАЙЛА</span>
@@ -297,11 +302,9 @@ export const Info = React.memo(() => {
                             value: /^[a-z0-9,:@]*$/,
                             message: ('Поле может состоять только  из  цифр, букв, запятой, двоеточия и @.')
                         }
-                    })} onInput={inputHandlerReg}  value={state.seeds}/>
+                    })} onInput={inputHandlerReg} value={state.seeds}/>
                     {errors.seeds && <div style={{color: "red"}}>{errors.seeds.message}</div>}
                 </div>
-
-
 
 
                 <div className={style.row}>app.toml: 1317
@@ -561,7 +564,9 @@ export const Info = React.memo(() => {
                 <h2>Полезные команды</h2>
                 <br/>
                 <h3>Проверить блоки</h3>
-                <div>{state.defundd} status 2{'>'}&1 {state.c2 && `--node tcp://127.0.0.1:${state.c2}`} | jq ."SyncInfo"."latest_block_height"</div>
+                <div>{state.defundd} status 2{'>'}&1 {state.c2 && `--node tcp://127.0.0.1:${state.c2}`} | jq
+                    ."SyncInfo"."latest_block_height"
+                </div>
                 <br/>
                 <h3>Проверить логи</h3>
                 <br/>
@@ -572,12 +577,15 @@ export const Info = React.memo(() => {
                 <div>curl localhost:26657/status</div>
                 <br/>
                 <h3>Проверить баланс</h3>
-                <div>{state.defundd} q bank balances defund1a... {state.c2 && `--node tcp://127.0.0.1:${state.c2}`}</div>
+                <div>{state.defundd} q bank balances
+                    defund1a... {state.c2 && `--node tcp://127.0.0.1:${state.c2}`}</div>
                 <br/>
                 <h3>Проверить валидатора</h3>
                 <br/>
-                <div>{state.defundd} query staking validator {state.defundvaloper1ms} {state.c2 && `--node tcp://127.0.0.1:${state.c2}`}</div>
-                <div>{state.defundd} query staking validators {state.c2 && `--node tcp://127.0.0.1:${state.c2}`} --limit 1000000 -o json | jq '.validators[] |
+                <div>{state.defundd} query staking
+                    validator {state.defundvaloper1ms} {state.c2 && `--node tcp://127.0.0.1:${state.c2}`}</div>
+                <div>{state.defundd} query staking validators {state.c2 && `--node tcp://127.0.0.1:${state.c2}`} --limit
+                    1000000 -o json | jq '.validators[] |
                     select(.description.moniker=={state.name} )' | jq
                 </div>
                 <h3>Собрать комиссионные + реварды</h3>
@@ -597,7 +605,8 @@ export const Info = React.memo(() => {
                 <h3>Unbond (в примере 10 монет)</h3>
                 <br/>
                 <div>{state.defundd} tx staking unbond {state.defundvaloper1ms} 10000000{state.ufetf}
-                    --from {state.wallet} --fees 5{state.ufetf} --chain-id {state.defund}-private-1 {state.c2 && `--node tcp://127.0.0.1:${state.c2}`} -y
+                    --from {state.wallet} --fees
+                    5{state.ufetf} --chain-id {state.defund}-private-1 {state.c2 && `--node tcp://127.0.0.1:${state.c2}`} -y
                 </div>
                 <br/>
                 <h3>Отправить монеты на другой адрес</h3>
@@ -606,7 +615,8 @@ export const Info = React.memo(() => {
                 </div>
                 <br/>
                 <h3>Выбраться из тюрьмы</h3>
-                <div>{state.defundd} tx slashing unjail --from {state.wallet} {state.c2 && `--node tcp://127.0.0.1:${state.c2}`}</div>
+                <div>{state.defundd} tx slashing unjail
+                    --from {state.wallet} {state.c2 && `--node tcp://127.0.0.1:${state.c2}`}</div>
                 <br/>
                 <h3>Список кошельков</h3>
                 <div>{state.defundd} keys list</div>
@@ -624,7 +634,8 @@ export const Info = React.memo(() => {
                 <div>{state.defundd} q staking params</div>
                 <br/>
                 <h3>Проголосовать за предложение </h3>
-                <div>{state.defundd} tx gov vote 1 yes --from {state.wallet} --fees 555{state.ufetf} {state.c2 && `--node tcp://127.0.0.1:${state.c2}`}</div>
+                <div>{state.defundd} tx gov vote 1 yes --from {state.wallet} --fees
+                    555{state.ufetf} {state.c2 && `--node tcp://127.0.0.1:${state.c2}`}</div>
                 <br/>
                 <h3>Внести депозит в предложение</h3>
                 <br/>
@@ -633,7 +644,8 @@ export const Info = React.memo(() => {
                 <br/>
                 <h3>Explorer</h3>
                 <br/>
-                <div>{state.defundd} q staking validators -oj {state.c2 && `--node tcp://127.0.0.1:${state.c2}`} --limit=3000 | jq '.validators[] |
+                <div>{state.defundd} q staking validators
+                    -oj {state.c2 && `--node tcp://127.0.0.1:${state.c2}`} --limit=3000 | jq '.validators[] |
                     select(.status=="BOND_STATUS_BONDED")' | jq -r '(.tokens|tonumber/pow(10; 6)|floor|tostring) + " \t
                     " + .description.{state.name}' | sort -gr | nl
                 </div>
