@@ -37,9 +37,9 @@ export const Info = React.memo(() => {
         ufetf: "",
         peers: "",
         seeds: "",
-        pruning1: "",
-        pruning2: "",
-        pruning3: "",
+        pruning1: "100",
+        pruning2: "0",
+        pruning3: "10",
         a1: "",
         a2: "",
         a3: "",
@@ -132,7 +132,7 @@ export const Info = React.memo(() => {
     }
     const inputHandlerReg = (e: ChangeEvent<HTMLInputElement>) => {
         const {name, value} = e.target;
-        if ( /^[0-9,:@]*$/.test(value)) {
+        if ( /^[a-z0-9,:@]*$/.test(value)) {
             setState({
                 ...state,
                 [name]: value
@@ -284,7 +284,7 @@ export const Info = React.memo(() => {
 
                     <input  {...register("peers", {
                         pattern: {
-                            value: /^[0-9,:@]*$/,
+                            value: /^[a-z0-9,:@]*$/,
                             message: ('Поле может состоять только  из  цифр, запятой, двоеточия и @.')
                         }
                     })} onInput={inputHandlerReg} value={state.peers}/>
@@ -294,18 +294,20 @@ export const Info = React.memo(() => {
                     <span>seeds</span>
                     <input {...register("seeds", {
                         pattern: {
-                            value: /^[0-9,:@]*$/,
-                            message: ('Поле может состоять только  из  цифр, запятой, двоеточия и @.')
+                            value: /^[a-z0-9,:@]*$/,
+                            message: ('Поле может состоять только  из  цифр, букв, запятой, двоеточия и @.')
                         }
                     })} onInput={inputHandlerReg}  value={state.seeds}/>
                     {errors.seeds && <div style={{color: "red"}}>{errors.seeds.message}</div>}
                 </div>
 
 
+
+
                 <div className={style.row}>app.toml: 1317
                     <input className={style.smallImp} {...register("a1", {
                         minLength: {
-                            value: 5,
+                            value: 2,
                             message: "Поле может состоять только  из пяти цифр"
                         },
                         maxLength: {
@@ -320,7 +322,7 @@ export const Info = React.memo(() => {
 
                     <input className={style.smallImp}  {...register("a2", {
                         minLength: {
-                            value: 5,
+                            value: 2,
                             message: "Поле может состоять только  из пяти цифр"
                         },
                         maxLength: {
@@ -334,7 +336,7 @@ export const Info = React.memo(() => {
                     })} onInput={inputHandlerNumbers5} value={state.a2}/>, 9090
                     <input className={style.smallImp} {...register("a3", {
                         minLength: {
-                            value: 5,
+                            value: 2,
                             message: "Поле может состоять только  из пяти цифр"
                         },
                         maxLength: {
@@ -352,7 +354,7 @@ export const Info = React.memo(() => {
                             message: "Поле может состоять только  из пяти цифр"
                         },
                         maxLength: {
-                            value: 5,
+                            value: 2,
                             message: "Поле может состоять только  из пяти цифр"
                         },
                         pattern: {
@@ -370,7 +372,7 @@ export const Info = React.memo(() => {
                 <div className={style.row}>config.toml: 26658
                     <input className={style.smallImp} {...register("c1", {
                         minLength: {
-                            value: 5,
+                            value: 2,
                             message: "Поле может состоять только  из пяти цифр"
                         },
                         maxLength: {
@@ -384,7 +386,7 @@ export const Info = React.memo(() => {
                     })} onInput={inputHandlerNumbers5} value={state.c1}/>, 26657
                     <input className={style.smallImp} {...register("c2", {
                         minLength: {
-                            value: 5,
+                            value: 2,
                             message: "Поле может состоять только  из пяти цифр"
                         },
                         maxLength: {
@@ -398,7 +400,7 @@ export const Info = React.memo(() => {
                     })} onInput={inputHandlerNumbers5} value={state.c2}/>, 6060
                     <input className={style.smallImp} {...register("c3", {
                         minLength: {
-                            value: 5,
+                            value: 2,
                             message: "Поле может состоять только  из пяти цифр"
                         },
                         maxLength: {
@@ -413,7 +415,7 @@ export const Info = React.memo(() => {
 
                     <input className={style.smallImp} {...register("c4", {
                         minLength: {
-                            value: 5,
+                            value: 2,
                             message: "Поле может состоять только  из пяти цифр"
                         },
                         maxLength: {
@@ -427,7 +429,7 @@ export const Info = React.memo(() => {
                     })} onInput={inputHandlerNumbers5} value={state.c4}/>, 26660
                     <input className={style.smallImp} {...register("c5", {
                         minLength: {
-                            value: 5,
+                            value: 2,
                             message: "Поле может состоять только  из пяти цифр"
                         },
                         maxLength: {
@@ -450,7 +452,7 @@ export const Info = React.memo(() => {
                     <span>АДРЕСС_ВАЛИДАТОРА</span>
                     <input {...register("defundvaloper1ms", {
                         pattern: {
-                            value: /^\d+$/,
+                            value: /^[a-zA-Z0-9]+$/,
                             message: ('Поле может состоять только  латинские символы и цифры.')
                         }
                     })} onInput={inputHandler} value={state.defundvaloper1ms}/>
@@ -555,18 +557,11 @@ export const Info = React.memo(() => {
                 <div>------------------КОМАНДЫ ПОСЛЕ УСТАНОВКИ-----------</div>
                 <br/>
                 <div>АДРЕСС_ВАЛИДАТОРА={state.defundvaloper1ms}</div>
-                <div>ПОРТ=26657 (по дефолту стоит такой (серым или как там называется по умолчанию значение), но
-                    если его меняют почти во все команды добавляется команда
-                </div>
-                <div>--node tcp://127.0.0.1:XXXX</div>
-                <div>XXXXX- измененный порт</div>
-                <br/>
-                <div>N – места, куда надо подставлять, ЕСЛИ только изменили с дефолтного</div>
                 <br/>
                 <h2>Полезные команды</h2>
                 <br/>
                 <h3>Проверить блоки</h3>
-                <div>{state.defundd} status 2{'>'}&1 N | jq ."SyncInfo"."latest_block_height"</div>
+                <div>{state.defundd} status 2{'>'}&1 {state.c2 && `--node tcp://127.0.0.1:${state.c2}`} | jq ."SyncInfo"."latest_block_height"</div>
                 <br/>
                 <h3>Проверить логи</h3>
                 <br/>
@@ -577,37 +572,37 @@ export const Info = React.memo(() => {
                 <div>curl localhost:26657/status</div>
                 <br/>
                 <h3>Проверить баланс</h3>
-                <div>{state.defundd} q bank balances defund1a... N</div>
+                <div>{state.defundd} q bank balances defund1a... {state.c2 && `--node tcp://127.0.0.1:${state.c2}`}</div>
                 <br/>
                 <h3>Проверить валидатора</h3>
                 <br/>
                 <div>{state.defundd} query staking validator {state.defundvaloper1ms} N</div>
-                <div>{state.defundd} query staking validators N --limit 1000000 -o json | jq '.validators[] |
+                <div>{state.defundd} query staking validators {state.c2 && `--node tcp://127.0.0.1:${state.c2}`} --limit 1000000 -o json | jq '.validators[] |
                     select(.description.moniker=={state.name} )' | jq
                 </div>
                 <h3>Собрать комиссионные + реварды</h3>
                 <br/>
                 <div>{state.defundd} tx distribution
                     withdraw-rewards {state.defundvaloper1ms} --from {state.wallet} --chain-id {state.defund}-private-1
-                    --fees 5{state.ufetf} --commission N -y
+                    --fees 5{state.ufetf} --commission {state.c2 && `--node tcp://127.0.0.1:${state.c2}`} -y
                 </div>
                 <br/>
                 <h3>Заделегировать себе в стейк еще (так отправляется 1 монетa)</h3>
                 <br/>
                 <div>{state.defundd} tx staking
                     delegate {state.defundvaloper1ms} 1000000{state.ufetf} --from {state.wallet} --fees
-                    5{state.ufetf} --chain-id {state.defund}-private-1 N -y
+                    5{state.ufetf} --chain-id {state.defund}-private-1 {state.c2 && `--node tcp://127.0.0.1:${state.c2}`} -y
                 </div>
                 <br/>
                 <h3>Unbond (в примере 10 монет)</h3>
                 <br/>
                 <div>{state.defundd} tx staking unbond {state.defundvaloper1ms} 10000000{state.ufetf}
-                    --from {state.wallet} --fees 5{state.ufetf} --chain-id {state.defund}-private-1 N -y
+                    --from {state.wallet} --fees 5{state.ufetf} --chain-id {state.defund}-private-1 {state.c2 && `--node tcp://127.0.0.1:${state.c2}`} -y
                 </div>
                 <br/>
                 <h3>Отправить монеты на другой адрес</h3>
                 <div>{state.defundd} tx bank send {state.wallet} {state.defundvaloper1ms} 1001000{state.ufetf} --fees
-                    5{state.ufetf} --chain-id {state.defund}-private-1 N -y
+                    5{state.ufetf} --chain-id {state.defund}-private-1 {state.c2 && `--node tcp://127.0.0.1:${state.c2}`} -y
                 </div>
                 <br/>
                 <h3>Выбраться из тюрьмы</h3>
@@ -638,7 +633,7 @@ export const Info = React.memo(() => {
                 <br/>
                 <h3>Explorer</h3>
                 <br/>
-                <div>{state.defundd} q staking validators -oj N --limit=3000 | jq '.validators[] |
+                <div>{state.defundd} q staking validators -oj {state.c2 && `--node tcp://127.0.0.1:${state.c2}`} --limit=3000 | jq '.validators[] |
                     select(.status=="BOND_STATUS_BONDED")' | jq -r '(.tokens|tonumber/pow(10; 6)|floor|tostring) + " \t
                     " + .description.{state.name}' | sort -gr | nl
                 </div>
