@@ -306,61 +306,61 @@ export const Info = React.memo(() => {
 
                 <div className={style.row}>app.toml: 1317
                     <input className={style.smallImp} {...register("a1", {
-                        minLength: {
-                            value: 2,
-                            message: "Поле может состоять только  из пяти цифр"
-                        },
-                        maxLength: {
-                            value: 5,
-                            message: "Поле может состоять только  из пяти цифр"
-                        },
-                        pattern: {
-                            value: /^\d+$/,
-                            message: ('Поле может состоять только  из пяти цифр.')
-                        }
+                        // minLength: {
+                        //     value: 2,
+                        //     // message: "Поле может состоять только  из пяти цифр"
+                        // },
+                        // maxLength: {
+                        //     value: 5,
+                        //     message: "Поле может состоять только  из пяти цифр"
+                        // },
+                        // pattern: {
+                        //     value: /^\d+$/,
+                        //     message: ('Поле может состоять только  из пяти цифр.')
+                        // }
                     })} onInput={inputHandlerNumbers5} value={state.a1}/>, 8080
 
                     <input className={style.smallImp}  {...register("a2", {
-                        minLength: {
-                            value: 2,
-                            message: "Поле может состоять только  из пяти цифр"
-                        },
-                        maxLength: {
-                            value: 5,
-                            message: "Поле может состоять только  из пяти цифр"
-                        },
-                        pattern: {
-                            value: /^\d+$/,
-                            message: ('Поле может состоять только  из пяти цифр.')
-                        }
+                        // minLength: {
+                        //     value: 2,
+                        //     message: "Поле может состоять только  из пяти цифр"
+                        // },
+                        // maxLength: {
+                        //     value: 5,
+                        //     message: "Поле может состоять только  из пяти цифр"
+                        // },
+                        // pattern: {
+                        //     value: /^\d+$/,
+                        //     message: ('Поле может состоять только  из пяти цифр.')
+                        // }
                     })} onInput={inputHandlerNumbers5} value={state.a2}/>, 9090
                     <input className={style.smallImp} {...register("a3", {
-                        minLength: {
-                            value: 2,
-                            message: "Поле может состоять только  из пяти цифр"
-                        },
-                        maxLength: {
-                            value: 5,
-                            message: "Поле может состоять только  из пяти цифр"
-                        },
-                        pattern: {
-                            value: /^\d+$/,
-                            message: ('Поле может состоять только  из пяти цифр.')
-                        }
+                        // minLength: {
+                        //     value: 2,
+                        //     message: "Поле может состоять только  из пяти цифр"
+                        // },
+                        // maxLength: {
+                        //     value: 5,
+                        //     message: "Поле может состоять только  из пяти цифр"
+                        // },
+                        // pattern: {
+                        //     value: /^\d+$/,
+                        //     message: ('Поле может состоять только  из пяти цифр.')
+                        // }
                     })} onInput={inputHandlerNumbers5} value={state.a3}/>, 9091
                     <input className={style.smallImp} {...register("a4", {
-                        minLength: {
-                            value: 5,
-                            message: "Поле может состоять только  из пяти цифр"
-                        },
-                        maxLength: {
-                            value: 2,
-                            message: "Поле может состоять только  из пяти цифр"
-                        },
-                        pattern: {
-                            value: /^\d+$/,
-                            message: ('Поле может состоять только  из пяти цифр.')
-                        }
+                        // minLength: {
+                        //     value: 5,
+                        //     message: "Поле может состоять только  из пяти цифр"
+                        // },
+                        // maxLength: {
+                        //     value: 2,
+                        //     message: "Поле может состоять только  из пяти цифр"
+                        // },
+                        // pattern: {
+                        //     value: /^\d+$/,
+                        //     message: ('Поле может состоять только  из пяти цифр.')
+                        // }
                     })} onInput={inputHandlerNumbers5} value={state.a4}/></div>
                 {errors.a1 && <div style={{color: "red"}}>{errors.a1.message}</div> ||
                 errors.a2 && <div style={{color: "red"}}>{errors.a2.message}</div> ||
@@ -371,75 +371,75 @@ export const Info = React.memo(() => {
 
                 <div className={style.row}>config.toml: 26658
                     <input className={style.smallImp} {...register("c1", {
-                        minLength: {
-                            value: 2,
-                            message: "Поле может состоять только  из пяти цифр"
-                        },
-                        maxLength: {
-                            value: 5,
-                            message: "Поле может состоять только  из пяти цифр"
-                        },
-                        pattern: {
-                            value: /^\d+$/,
-                            message: ('Поле может состоять только  из пяти цифр.')
-                        }
+                        // minLength: {
+                        //     value: 2,
+                        //     message: "Поле может состоять только  из пяти цифр"
+                        // },
+                        // maxLength: {
+                        //     value: 5,
+                        //     message: "Поле может состоять только  из пяти цифр"
+                        // },
+                        // pattern: {
+                        //     value: /^\d+$/,
+                        //     message: ('Поле может состоять только  из пяти цифр.')
+                        // }
                     })} onInput={inputHandlerNumbers5} value={state.c1}/>, 26657
                     <input className={style.smallImp} {...register("c2", {
-                        minLength: {
-                            value: 2,
-                            message: "Поле может состоять только  из пяти цифр"
-                        },
-                        maxLength: {
-                            value: 5,
-                            message: "Поле может состоять только  из пяти цифр"
-                        },
-                        pattern: {
-                            value: /^\d+$/,
-                            message: ('Поле может состоять только  из пяти цифр.')
-                        }
+                        // minLength: {
+                        //     value: 2,
+                        //     message: "Поле может состоять только  из пяти цифр"
+                        // },
+                        // maxLength: {
+                        //     value: 5,
+                        //     message: "Поле может состоять только  из пяти цифр"
+                        // },
+                        // pattern: {
+                        //     value: /^\d+$/,
+                        //     message: ('Поле может состоять только  из пяти цифр.')
+                        // }
                     })} onInput={inputHandlerNumbers5} value={state.c2}/>, 6060
                     <input className={style.smallImp} {...register("c3", {
-                        minLength: {
-                            value: 2,
-                            message: "Поле может состоять только  из пяти цифр"
-                        },
-                        maxLength: {
-                            value: 5,
-                            message: "Поле может состоять только  из пяти цифр"
-                        },
-                        pattern: {
-                            value: /^\d+$/,
-                            message: ('Поле может состоять только  из пяти цифр.')
-                        }
+                        // minLength: {
+                        //     value: 2,
+                        //     message: "Поле может состоять только  из пяти цифр"
+                        // },
+                        // maxLength: {
+                        //     value: 5,
+                        //     message: "Поле может состоять только  из пяти цифр"
+                        // },
+                        // pattern: {
+                        //     value: /^\d+$/,
+                        //     message: ('Поле может состоять только  из пяти цифр.')
+                        // }
                     })} onInput={inputHandlerNumbers5} value={state.c3}/>, 26656
 
                     <input className={style.smallImp} {...register("c4", {
-                        minLength: {
-                            value: 2,
-                            message: "Поле может состоять только  из пяти цифр"
-                        },
-                        maxLength: {
-                            value: 5,
-                            message: "Поле может состоять только  из пяти цифр"
-                        },
-                        pattern: {
-                            value: /^\d+$/,
-                            message: ('Поле может состоять только  из пяти цифр.')
-                        }
+                        // minLength: {
+                        //     value: 2,
+                        //     message: "Поле может состоять только  из пяти цифр"
+                        // },
+                        // maxLength: {
+                        //     value: 5,
+                        //     message: "Поле может состоять только  из пяти цифр"
+                        // },
+                        // pattern: {
+                        //     value: /^\d+$/,
+                        //     message: ('Поле может состоять только  из пяти цифр.')
+                        // }
                     })} onInput={inputHandlerNumbers5} value={state.c4}/>, 26660
                     <input className={style.smallImp} {...register("c5", {
-                        minLength: {
-                            value: 2,
-                            message: "Поле может состоять только  из пяти цифр"
-                        },
-                        maxLength: {
-                            value: 5,
-                            message: "Поле может состоять только  из пяти цифр"
-                        },
-                        pattern: {
-                            value: /^\d+$/,
-                            message: ('Поле может состоять только  из пяти цифр.')
-                        }
+                        // minLength: {
+                        //     value: 2,
+                        //     message: "Поле может состоять только  из пяти цифр"
+                        // },
+                        // maxLength: {
+                        //     value: 5,
+                        //     message: "Поле может состоять только  из пяти цифр"
+                        // },
+                        // pattern: {
+                        //     value: /^\d+$/,
+                        //     message: ('Поле может состоять только  из пяти цифр.')
+                        // }
                     })} onInput={inputHandlerNumbers5} value={state.c5}/>
                     {errors.c1 && <div style={{color: "red"}}>{errors.c1.message}</div> ||
                     errors.c2 && <div style={{color: "red"}}>{errors.c2.message}</div> ||

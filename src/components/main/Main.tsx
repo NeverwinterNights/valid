@@ -121,7 +121,7 @@ export const Main = React.memo(() => {
                     <div className={style.title}>And other</div>
                     <div className={style.link}>Kira, Massa, Meson, Minima, Aptos, Subspace, Humanode</div>
                 </div>
-
+<button title={""}/>
             </div>
         </>
     );
