@@ -37,9 +37,9 @@ export const Info = React.memo(() => {
         ufetf: "",
         peers: "",
         seeds: "",
-        pruning1: "100",
-        pruning2: "0",
-        pruning3: "10",
+        pruning1: "",
+        pruning2: "",
+        pruning3: "",
         a1: "",
         a2: "",
         a3: "",
@@ -227,7 +227,7 @@ export const Info = React.memo(() => {
 
                 <div className={style.row}>
                     <span>ПРУНИНГ </span>
-                    <input className={style.number} {...register("pruning1", {
+                    <input className={style.number} placeholder={"100"} {...register("pruning1", {
                         minLength: {
                             value: 6,
                             message: "Поле может состоять только  из шести цифр"
@@ -243,7 +243,7 @@ export const Info = React.memo(() => {
                     })} onInput={inputHandlerNumbers6} value={state.pruning1} name="pruning1"/>
 
 
-                    <input className={style.number} {...register("pruning2", {
+                    <input className={style.number} placeholder={"0"}  {...register("pruning2", {
                         minLength: {
                             value: 2,
                             message: "Поле может состоять только  из двух цифр"
@@ -259,7 +259,7 @@ export const Info = React.memo(() => {
                     })} onInput={inputHandlerNumbers2} value={state.pruning2} name="pruning2"/>
 
 
-                    <input className={style.number} {...register("pruning3", {
+                    <input className={style.number} placeholder={"10"}  {...register("pruning3", {
                         minLength: {
                             value: 4,
                             message: "Поле может состоять только  из четырех цифр"
