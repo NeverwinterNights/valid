@@ -228,50 +228,50 @@ export const Info = React.memo(() => {
                 <div className={style.row}>
                     <span>ПРУНИНГ </span>
                     <input className={style.number} placeholder={"100"} {...register("pruning1", {
-                        minLength: {
-                            value: 6,
-                            message: "Поле может состоять только  из шести цифр"
-                        },
-                        maxLength: {
-                            value: 6,
-                            message: "Поле может состоять только  из шести цифр"
-                        },
-                        pattern: {
-                            value: /^\d+$/,
-                            message: ('Поле может состоять только  из пяти цифр.')
-                        }
+                        // minLength: {
+                        //     value: 6,
+                        //     message: "Поле может состоять только  из шести цифр"
+                        // },
+                        // maxLength: {
+                        //     value: 6,
+                        //     message: "Поле может состоять только  из шести цифр"
+                        // },
+                        // pattern: {
+                        //     value: /^\d+$/,
+                        //     message: ('Поле может состоять только  из пяти цифр.')
+                        // }
                     })} onInput={inputHandlerNumbers6} value={state.pruning1} name="pruning1"/>
 
 
                     <input className={style.number} placeholder={"0"}  {...register("pruning2", {
-                        minLength: {
-                            value: 2,
-                            message: "Поле может состоять только  из двух цифр"
-                        },
-                        maxLength: {
-                            value: 2,
-                            message: "Поле может состоять только  из двух цифр"
-                        },
-                        pattern: {
-                            value: /^\d+$/,
-                            message: ('Поле может состоять только  из двух цифр.')
-                        }
+                        // minLength: {
+                        //     value: 2,
+                        //     message: "Поле может состоять только  из двух цифр"
+                        // },
+                        // maxLength: {
+                        //     value: 2,
+                        //     message: "Поле может состоять только  из двух цифр"
+                        // },
+                        // pattern: {
+                        //     value: /^\d+$/,
+                        //     message: ('Поле может состоять только  из двух цифр.')
+                        // }
                     })} onInput={inputHandlerNumbers2} value={state.pruning2} name="pruning2"/>
 
 
                     <input className={style.number} placeholder={"10"}  {...register("pruning3", {
-                        minLength: {
-                            value: 4,
-                            message: "Поле может состоять только  из четырех цифр"
-                        },
-                        maxLength: {
-                            value: 4,
-                            message: "Поле может состоять только  из четырех цифр"
-                        },
-                        pattern: {
-                            value: /^\d+$/,
-                            message: ('Поле может состоять только  из четырех цифр.')
-                        }
+                        // minLength: {
+                        //     value: 4,
+                        //     message: "Поле может состоять только  из четырех цифр"
+                        // },
+                        // maxLength: {
+                        //     value: 4,
+                        //     message: "Поле может состоять только  из четырех цифр"
+                        // },
+                        // pattern: {
+                        //     value: /^\d+$/,
+                        //     message: ('Поле может состоять только  из четырех цифр.')
+                        // }
                     })} onInput={inputHandlerNumbers4} value={state.pruning3} name="pruning3"/>
                     {errors.pruning1 && <div style={{color: "red"}}>{errors.pruning1.message}</div> ||
                     errors.pruning2 && <div style={{color: "red"}}>{errors.pruning2.message}</div> ||

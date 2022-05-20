@@ -9,8 +9,8 @@ function App() {
     return (
         <div className="App">
             {/*<Main/>*/}
-            {/*<RoutesComponent/>*/}
-            <Info/>
+            <RoutesComponent/>
+            {/*<Info/>*/}
         </div>
     );
 }
