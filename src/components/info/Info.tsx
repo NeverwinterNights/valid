@@ -576,7 +576,7 @@ export const Info = React.memo(() => {
                 <br/>
                 <h3>Проверить валидатора</h3>
                 <br/>
-                <div>{state.defundd} query staking validator {state.defundvaloper1ms} N</div>
+                <div>{state.defundd} query staking validator {state.defundvaloper1ms} {state.c2 && `--node tcp://127.0.0.1:${state.c2}`}</div>
                 <div>{state.defundd} query staking validators {state.c2 && `--node tcp://127.0.0.1:${state.c2}`} --limit 1000000 -o json | jq '.validators[] |
                     select(.description.moniker=={state.name} )' | jq
                 </div>
@@ -606,7 +606,7 @@ export const Info = React.memo(() => {
                 </div>
                 <br/>
                 <h3>Выбраться из тюрьмы</h3>
-                <div>{state.defundd} tx slashing unjail --from {state.wallet} N</div>
+                <div>{state.defundd} tx slashing unjail --from {state.wallet} {state.c2 && `--node tcp://127.0.0.1:${state.c2}`}</div>
                 <br/>
                 <h3>Список кошельков</h3>
                 <div>{state.defundd} keys list</div>
@@ -624,7 +624,7 @@ export const Info = React.memo(() => {
                 <div>{state.defundd} q staking params</div>
                 <br/>
                 <h3>Проголосовать за предложение </h3>
-                <div>{state.defundd} tx gov vote 1 yes --from {state.wallet} --fees 555{state.ufetf} N</div>
+                <div>{state.defundd} tx gov vote 1 yes --from {state.wallet} --fees 555{state.ufetf} {state.c2 && `--node tcp://127.0.0.1:${state.c2}`}</div>
                 <br/>
                 <h3>Внести депозит в предложение</h3>
                 <br/>
